@@ -1,0 +1,53 @@
+/* theme für das menü */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* root container wo das menü drin ist */
+#ui-root {
+position: absolute;
+width: 100%;
+height: 100%;
+}
+/* button position  */
+.menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffffff;
+}
+.menu h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+/* button style */
+.ui-button {
+  background-color: #A9A9A9;
+  color: #000000;
+  border: 2px solid #000000;
+  padding: 12px 24px;
+  margin: 8px auto;     /* zentriert den Button innerhalb .menu */
+  display: block;
+  width: 200px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #000000;
+  transition: all 0.1s ease-out;
+}
+.ui-button:active {
+  background-color: #808080;
+  box-shadow: 1px 1px 0px #000000;
+  transform: translate(2px, 2px);
+}
