@@ -6,3 +6,4 @@ UserSettings/
 .vs/
 *.csproj
 *.sln
+.vscode/
