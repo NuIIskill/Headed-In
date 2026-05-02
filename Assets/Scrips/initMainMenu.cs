@@ -13,7 +13,6 @@ public class initMainMenu : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
-    [SerializeField] private string menuMusicTrack = "MainMenu";
     [SerializeField] private string gameMusicTrack = "Game";
     [SerializeField] private string clickSound = "click";
 
@@ -24,6 +23,7 @@ public class initMainMenu : MonoBehaviour
     private const string SfxMixerParameter = "SFXVolume";
     private const string MusicPrefsKey = "MusicVolumeSlider";
     private const string SfxPrefsKey = "SFXVolumeSlider";
+    private const string MenuMusicTrack = "menumusic";
 
     private void Start()
     {
@@ -140,7 +140,7 @@ public class initMainMenu : MonoBehaviour
     {
         if (MusicManager.Instance != null)
         {
-            MusicManager.Instance.PlayMusic(menuMusicTrack);
+            MusicManager.Instance.PlayMusic(MenuMusicTrack);
         }
     }
 

@@ -148,9 +148,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 17073848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed93472e49f15b0d8b0fa8fcc1b188d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 7698790dbef1c1da6b3cce08bf92612e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  musicLibrary: {fileID: 17073850}
+  musicSource: {fileID: 1081123844}
+  defaultFadeDuration: 0.5
 --- !u!114 &17073850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,9 +163,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 17073848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e251eddc1adffdfadab42479af4659, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e4293d13d64977ab8b93256a0e5dc32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicLibrary
+  tracks:
+  - trackName: menumusic
+    clip: {fileID: 8300000, guid: 2080d01abe0131b029bd3ade879a4668, type: 3}
 --- !u!114 &17073851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,9 +178,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 17073848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87f898cdddf347981820c858412268a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 3950d17613867f3d9868baf0563d01b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  soundLibrary: {fileID: 17073852}
+  sfx2DSource: {fileID: 1249964597}
 --- !u!114 &17073852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,9 +192,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 17073848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024dd40e73bb178daa887b0b1ddbbe25, type: 3}
+  m_Script: {fileID: 11500000, guid: 3904707fe7fc52a92b4e7a3e28bc3daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+  soundEffects: []
 --- !u!4 &17073853
 Transform:
   m_ObjectHideFlags: 0
@@ -200,6 +209,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 910000002}
   - {fileID: 1081123845}
   - {fileID: 1249964598}
   m_Father: {fileID: 0}
@@ -638,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39607844, g: 0.8, b: 0.12575784, a: 1}
+  m_Color: {r: 0.24705882, g: 0.24313726, b: 0.24313726, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -923,7 +933,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 440665175}
-        m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: initMainMenu, Assembly-CSharp
         m_MethodName: UpdateMusicVolume
         m_Mode: 4
         m_Arguments:
@@ -1051,9 +1061,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 440665170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 234b8c4ad43cf99ffabd03746ae37b92, type: 3}
+  m_Script: {fileID: 11500000, guid: a0a3dc6c5738b96e1975f803041881ea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StartMenuController
+  m_EditorClassIdentifier: Assembly-CSharp::initMainMenu
+  mainMenu: {fileID: 226958266}
+  optionsMenu: {fileID: 1565623498}
+  audioMixer: {fileID: 24100000, guid: f11ba642ddb95448588258c4681c7337, type: 2}
+  musicSlider: {fileID: 402511535}
+  sfxSlider: {fileID: 1014084515}
+  gameMusicTrack: Game
+  clickSound: click
+  gameSceneName: GameScene
 --- !u!1 &475924045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5918476, g: 0.9433962, b: 0.6413035, a: 1}
+  m_Color: {r: 0.52156866, g: 0.5176471, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1762,6 +1780,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889044002}
   m_CullTransparentMesh: 1
+--- !u!1 &910000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910000002}
+  - component: {fileID: 910000003}
+  m_Layer: 0
+  m_Name: MenuAudioListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &910000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -930.2387, y: -501.47333, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 17073853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &910000003
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910000001}
+  m_Enabled: 1
 --- !u!1 &914960792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1928,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 440665175}
-        m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: initMainMenu, Assembly-CSharp
         m_MethodName: PlayClick
         m_Mode: 1
         m_Arguments:
@@ -2146,8 +2204,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
+      - m_Target: {fileID: 440665175}
+        m_TargetAssemblyTypeName: initMainMenu, Assembly-CSharp
         m_MethodName: UpdateSoundVolume
         m_Mode: 4
         m_Arguments:
@@ -2208,7 +2266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5918476, g: 0.9433962, b: 0.6413035, a: 1}
+  m_Color: {r: 0.5176471, g: 0.52156866, b: 0.52156866, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2259,7 +2317,7 @@ AudioSource:
   m_GameObject: {fileID: 1081123843}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 8880630935200383587, guid: 5ba5bfb2430362393bc40f393fcdf1f0, type: 2}
+  OutputAudioMixerGroup: {fileID: 3753045697028885264, guid: f11ba642ddb95448588258c4681c7337, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -2503,7 +2561,7 @@ AudioSource:
   m_GameObject: {fileID: 1249964596}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7050571297048424315, guid: 5ba5bfb2430362393bc40f393fcdf1f0, type: 2}
+  OutputAudioMixerGroup: {fileID: 2372185218508187024, guid: f11ba642ddb95448588258c4681c7337, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -2656,7 +2714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.39716092, g: 0.8018868, b: 0.1254902, a: 1}
+  m_Color: {r: 0.24705882, g: 0.24313726, b: 0.24313726, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2764,8 +2822,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
+      - m_Target: {fileID: 440665175}
+        m_TargetAssemblyTypeName: initMainMenu, Assembly-CSharp
         m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:
@@ -2898,7 +2956,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 440665175}
-        m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: initMainMenu, Assembly-CSharp
         m_MethodName: OnStartClick
         m_Mode: 1
         m_Arguments:
@@ -3122,7 +3180,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 440665175}
-        m_TargetAssemblyTypeName: StartMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: initMainMenu, Assembly-CSharp
         m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:

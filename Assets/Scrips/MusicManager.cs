@@ -9,6 +9,9 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private float defaultFadeDuration = 0.5f;
 
+    private const string MenuMusicTrackName = "menumusic";
+    private const string LegacyMenuMusicTrackName = "MainMenu";
+
     private Coroutine fadeRoutine;
 
     private void Awake()
@@ -22,9 +25,19 @@ public class MusicManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        if (musicLibrary == null)
+        {
+            musicLibrary = GetComponent<MusicLibrary>();
+        }
+
         if (musicSource == null)
         {
             musicSource = GetComponent<AudioSource>();
+        }
+
+        if (musicSource == null)
+        {
+            musicSource = GetComponentInChildren<AudioSource>();
         }
     }
 
@@ -37,11 +50,30 @@ public class MusicManager : MonoBehaviour
     {
         if (musicLibrary == null || musicSource == null)
         {
+            Debug.LogWarning("MusicManager is missing a MusicLibrary or AudioSource reference.", this);
             return;
         }
 
+        trackName = NormalizeTrackName(trackName);
         AudioClip nextTrack = musicLibrary.GetClip(trackName);
+
+        if (nextTrack == null)
+        {
+            Debug.LogWarning($"Music track '{trackName}' was not found in the MusicLibrary.", this);
+            return;
+        }
+
         PlayMusic(nextTrack, fadeDuration);
+    }
+
+    private string NormalizeTrackName(string trackName)
+    {
+        if (trackName == LegacyMenuMusicTrackName)
+        {
+            return MenuMusicTrackName;
+        }
+
+        return trackName;
     }
 
     public void PlayMusic(AudioClip nextTrack)
@@ -97,12 +129,49 @@ public class MusicManager : MonoBehaviour
             yield break;
         }
 
+        if (nextTrack.loadState == AudioDataLoadState.Unloaded)
+        {
+            nextTrack.LoadAudioData();
+        }
+
+        while (nextTrack.loadState == AudioDataLoadState.Loading)
+        {
+            yield return null;
+        }
+
+        if (nextTrack.loadState == AudioDataLoadState.Failed)
+        {
+            Debug.LogWarning($"Music track '{nextTrack.name}' failed to load.", this);
+            fadeRoutine = null;
+            yield break;
+        }
+
+        if (!musicSource.isPlaying || musicSource.clip == null)
+        {
+            musicSource.clip = nextTrack;
+            musicSource.volume = 0f;
+            musicSource.Play();
+
+            float fadeInTimer = 0f;
+
+            while (fadeInTimer < fadeDuration)
+            {
+                fadeInTimer += Time.unscaledDeltaTime;
+                musicSource.volume = Mathf.Lerp(0f, 1f, fadeInTimer / fadeDuration);
+                yield return null;
+            }
+
+            musicSource.volume = 1f;
+            fadeRoutine = null;
+            yield break;
+        }
+
         float startVolume = musicSource.volume;
         float timer = 0f;
 
         while (timer < fadeDuration)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             musicSource.volume = Mathf.Lerp(startVolume, 0f, timer / fadeDuration);
             yield return null;
         }
@@ -114,7 +183,7 @@ public class MusicManager : MonoBehaviour
 
         while (timer < fadeDuration)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             musicSource.volume = Mathf.Lerp(0f, 1f, timer / fadeDuration);
             yield return null;
         }
@@ -141,7 +210,7 @@ public class MusicManager : MonoBehaviour
 
         while (timer < fadeDuration)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             musicSource.volume = Mathf.Lerp(startVolume, 0f, timer / fadeDuration);
             yield return null;
         }
