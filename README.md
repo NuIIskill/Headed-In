@@ -1,6 +1,6 @@
 # Headed-In
 
-**Headed-In** ist ein Unity-Spiel, das ein School-Shooting-Szenario darstellt.
+**Headed-In** ist ein Unity-Spiel, das ein S-Shooting-Szenario darstellt.
 
 ## Beschreibung
 
