@@ -4,11 +4,8 @@
 
 ## Beschreibung
 
-Headed-In ist ein Spiel, das in einer Schule spielt und ein S Shooting als zentrales Szenario thematisiert. Der Fokus liegt auf Atmosphäre, Spannung und Interaktion innerhalb der Spielwelt.
+Headed-In ist ein Spiel, das in einer Schule Der Fokus liegt auf Atmosphäre, Spannung und Interaktion innerhalb der Spielwelt.
 
-## Hinweis
-
-Dieses Projekt behandelt ein äußerst sensibles und reales Thema. Es ist nicht dazu gedacht, Gewalt zu verherrlichen oder zu fördern. Der Inhalt sollte mit entsprechendem Bewusstsein und Kontext betrachtet werden.
 
 ## Technologien
 
